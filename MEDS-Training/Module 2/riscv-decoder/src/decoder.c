@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-/* Private helper functions */
+
 static void decode_r_type(const decoded_instr_t *decoded, char *buffer);
 static void decode_i_type(const decoded_instr_t *decoded, char *buffer);
 static void decode_load(const decoded_instr_t *decoded, char *buffer);
