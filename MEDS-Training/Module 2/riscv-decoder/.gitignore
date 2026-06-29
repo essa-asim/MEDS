@@ -1,7 +1,9 @@
 bin/
 obj/
+build/
 
 *.exe
+*.d
 *.o
 *.out
 
