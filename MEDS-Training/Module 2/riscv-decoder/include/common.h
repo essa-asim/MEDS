@@ -5,18 +5,6 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-/* ---------------- Constants ---------------- */
-
-#define MEMORY_SIZE     65536
-#define INSTRUCTION_SIZE 4
-
-/* Bit Masks */
-#define OPCODE_MASK 0x7F
-#define RD_MASK     0x1F
-#define RS_MASK     0x1F
-#define FUNCT3_MASK 0x07
-#define FUNCT7_MASK 0x7F
-
 /* ---------------- Function-like Macro ---------------- */
 
 #define EXTRACT_BITS(value, high, low) \
