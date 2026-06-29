@@ -30,4 +30,5 @@ int load_hex_file(const char *filename,
     fclose(fp);
 
     return count;
+
 }
