@@ -2,6 +2,9 @@
 #include <stdlib.h>
 
 #include "decoder.h"
+#include "memory.h"
+
+#define MAX_INSTRUCTIONS 1024
 
 int main(int argc, char *argv[])
 {
@@ -12,12 +15,16 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    /* Open hex file */
-    FILE *fp = fopen(argv[1], "r");
+    /* Memory to store instructions */
+    uint32_t memory[MAX_INSTRUCTIONS];
 
-    if (fp == NULL)
+    /* Load hex file */
+    int instruction_count = load_hex_file(argv[1],
+                                          memory,
+                                          MAX_INSTRUCTIONS);
+
+    if (instruction_count < 0)
     {
-        perror("Error opening file");
         return 1;
     }
 
@@ -27,30 +34,26 @@ int main(int argc, char *argv[])
     printf("%-12s %-10s %s\n", "Address", "Hex", "Assembly");
     printf("----------------------------------------------------------\n");
 
-    char line[32];
-    uint32_t instruction;
-    uint32_t address = 0;
-
     decoded_instr_t decoded;
     char assembly[100];
 
-    while (fgets(line, sizeof(line), fp))
-    {
-        instruction = (uint32_t)strtoul(line, NULL, 16);
+    uint32_t address = 0;
 
-        decode_instruction(instruction, &decoded);
+    for (int i = 0; i < instruction_count; i++)
+    {
+        decode_instruction(memory[i], &decoded);
 
         instruction_to_string(&decoded, assembly);
 
-        printf("0x%08X %-10s %s\n",
+        printf("0x%08X   %08X   %s\n",
                address,
-               line,
+               memory[i],
                assembly);
 
         address += 4;
     }
 
-    fclose(fp);
+    printf("\nDecoded %d instruction(s).\n", instruction_count);
 
     return 0;
 }
