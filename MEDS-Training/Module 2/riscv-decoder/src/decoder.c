@@ -12,9 +12,8 @@ static void decode_u_type(const decoded_instr_t *decoded, char *buffer);
 static void decode_jump(const decoded_instr_t *decoded, char *buffer);
 
 
-/*----------------------------------------------------------
- * Decode a 32-bit RISC-V instruction into its fields
- *---------------------------------------------------------*/
+ /* Decode a 32-bit RISC-V instruction into its fields */
+
 void decode_instruction(uint32_t instruction,
                         decoded_instr_t *decoded)
 {
@@ -90,9 +89,8 @@ void decode_instruction(uint32_t instruction,
     }
 }
 
-/*----------------------------------------------------------
- * Convert decoded instruction to assembly string
- *---------------------------------------------------------*/
+
+ /* Convert decoded instruction to assembly string */
 
 void instruction_to_string(const decoded_instr_t *decoded,
                            char *buffer)
